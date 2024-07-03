@@ -6,6 +6,7 @@ import Modal from "./Modal";
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Homepage = () => {
+  console.log(BASE_URL);
   const [showModal, setShowModal] = useState(false);
   const [gst, setgst] = useState(0);
   const [inwards, setinwards] = useState(0);
