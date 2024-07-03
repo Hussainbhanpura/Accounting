@@ -6,7 +6,7 @@ import Modal from "./Modal";
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Homepage = () => {
-  console.log(BASE_URL);
+  
   const [showModal, setShowModal] = useState(false);
   const [gst, setgst] = useState(0);
   const [inwards, setinwards] = useState(0);
@@ -19,7 +19,7 @@ const Homepage = () => {
     axios
       .get(`https://accounting-azure-six.vercel.app/api/total`)
       .then((response) => {
-        console.log(response.data);
+        console.log(BASE_URL);
         setgst(response.data.totalGst);
         setinwards(response.data.totalInwards);
       })
