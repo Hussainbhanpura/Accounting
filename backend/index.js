@@ -7,11 +7,11 @@ const Purchase = require('./modal/purchaseModal');
 const app = express();
 const port = process.env.PORT || 3001;
 const mongoUrl = process.env.MONGO_URL;
-// app.use(cors({
-//     orgin : [""],
-//     methods : ["POST", "PUT", "DELETE", "PATCH","GET"],
-//     credentials: true, 
-// }));
+app.use(cors({
+    orgin : ["https://accounts-flax.vercel.app/"],
+    methods : ["POST", "PUT", "DELETE", "PATCH","GET"],
+    credentials: true, 
+}));
 app.use(cors())
 
 // MongoDB connection
