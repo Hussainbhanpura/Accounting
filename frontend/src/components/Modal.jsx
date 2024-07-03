@@ -15,6 +15,7 @@ const Modal = ({ modal }) => {
       purchaseAmount,
       gst,
     });
+    window.refresh();
     modal(false);
   };
 
