@@ -19,7 +19,6 @@ const Homepage = () => {
     axios
       .get(`${BASE_URL}/total`)
       .then((response) => {
-        console.log(BASE_URL);
         setgst(response.data.totalGst);
         setinwards(response.data.totalInwards);
       })
