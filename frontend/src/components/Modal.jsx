@@ -9,12 +9,12 @@ const Modal = ({ modal }) => {
   const [gst, setgst] = useState(0);
 
   const handleSubmit = () => {
+    console.log(BASE_URL)
     axios.post(`${BASE_URL}/data`, {
       inwardsAmount,
       purchaseAmount,
       gst,
     });
-    window.refresh();
     modal(false);
   };
 
@@ -22,6 +22,7 @@ const Modal = ({ modal }) => {
     setter(e.target.value);
   };
   useEffect(() => {
+    console.log(BASE_URL)
     setgst((purchaseAmount * gstRate) / 100);
   }, [purchaseAmount, gstRate]);
   return (
