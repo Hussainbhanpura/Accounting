@@ -16,7 +16,7 @@ const Homepage = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/total`)
+      .get(`https://accounting-azure-six.vercel.app/api/total`)
       .then((response) => {
         console.log(response.data);
         setgst(response.data.totalGst);
