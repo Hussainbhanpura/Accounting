@@ -1,10 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const Purchase = require('./modal/purchaseModal');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
+const mongoUrl = process.env.MONGO_URL;
 app.use(cors({
     orgin : [""],
     methods : ["POST", "PUT", "DELETE", "PATCH","GET"],
@@ -12,7 +14,7 @@ app.use(cors({
 }));
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://mixik98401:BQiAv6X0n83V4Yw3@cluster0.qpaqsqv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(`${mongoUrl}`, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Error connecting to MongoDB:', err));
 
@@ -56,5 +58,5 @@ app.get('/api/total', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+   console.log("Hello")
 });
