@@ -23,7 +23,7 @@ const Homepage = () => {
     } catch (error) {}
   };
 
-  useEffect(() => {
+  const setTotal = () => {
     axios
       .get(`${BASE_URL}/total`)
       .then((response) => {
@@ -33,10 +33,17 @@ const Homepage = () => {
       .catch((error) => {
         console.error("Error fetching total data:", error);
       });
+  };
 
+  const allTransactions = () => {
     axios.get(`${BASE_URL}/all`).then((response) => {
       setTransactions(response.data);
     });
+  };
+
+  useEffect(() => {
+    setTotal();
+    allTransactions();
   }, []);
 
   return (
@@ -47,7 +54,13 @@ const Homepage = () => {
         {" "}
         + Add Data
       </button>
-      {showModal && <Modal modal={setShowModal} />}
+      {showModal && (
+        <Modal
+          setTotal={setTotal}
+          allTransactions={allTransactions}
+          modal={setShowModal}
+        />
+      )}
 
       <div className='table-responsive'>
         <table className='table table-striped table-hover'>

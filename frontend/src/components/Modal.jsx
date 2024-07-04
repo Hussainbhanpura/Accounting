@@ -2,19 +2,27 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-const Modal = ({ modal }) => {
+const Modal = ({ modal, setTotal, allTransactions }) => {
   const [inwardsAmount, setinwards] = useState(0);
   const [purchaseAmount, setpurchase] = useState(0);
   const [gstRate, setgstRate] = useState(18);
   const [gst, setgst] = useState(0);
 
   const handleSubmit = async () => {
-    axios.post(`${BASE_URL}/data`, {
-      inwardsAmount,
-      purchaseAmount,
-      gst,
-    });
-    window.refresh();
+    axios
+      .post(`${BASE_URL}/data`, {
+        inwardsAmount,
+        purchaseAmount,
+        gst,
+      })
+      .then((response) => {
+        setTotal();
+        allTransactions();
+      })
+      .catch((error) => {
+        console.error("Error adding purchase:", error);
+      });
+    // window.refresh();
     modal(false);
   };
 
