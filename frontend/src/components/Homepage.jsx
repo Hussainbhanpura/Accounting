@@ -6,6 +6,7 @@ import Modal from "./Modal";
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Homepage = () => {
+  
   const [showModal, setShowModal] = useState(false);
   const [gst, setgst] = useState(0);
   const [inwards, setinwards] = useState(0);
@@ -27,7 +28,6 @@ const Homepage = () => {
     axios
       .get(`${BASE_URL}/total`)
       .then((response) => {
-        console.log(response.data);
         setgst(response.data.totalGst);
         setinwards(response.data.totalInwards);
       })
