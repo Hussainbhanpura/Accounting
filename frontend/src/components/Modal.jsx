@@ -9,7 +9,7 @@ const Modal = ({ modal }) => {
   const [gst, setgst] = useState(0);
 
   const handleSubmit = async () => {
-    await axios.post(`${BASE_URL}/data`, {
+    axios.post(`${BASE_URL}/data`, {
       inwardsAmount,
       purchaseAmount,
       gst,
