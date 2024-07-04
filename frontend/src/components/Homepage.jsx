@@ -6,7 +6,6 @@ import Modal from "./Modal";
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Homepage = () => {
-  
   const [showModal, setShowModal] = useState(false);
   const [gst, setgst] = useState(0);
   const [inwards, setinwards] = useState(0);
@@ -18,7 +17,7 @@ const Homepage = () => {
   const handleDelete = (id) => {
     console.log(id);
     try {
-      axios.delete(`${BASE_URL}/api/delete/${id}`).then((response) => {
+      axios.delete(`${BASE_URL}/delete/${id}`).then((response) => {
         window.location.reload();
       });
     } catch (error) {}
@@ -36,7 +35,6 @@ const Homepage = () => {
       });
 
     axios.get(`${BASE_URL}/all`).then((response) => {
-      console.log(response.data);
       setTransactions(response.data);
     });
   }, []);
