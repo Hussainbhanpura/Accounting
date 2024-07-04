@@ -22,6 +22,7 @@ const Modal = ({ modal }) => {
     setter(e.target.value);
   };
   useEffect(() => {
+    console.log(`${BASE_URL}`)
     setgst((purchaseAmount * gstRate) / 100);
   }, [purchaseAmount, gstRate]);
   return (
