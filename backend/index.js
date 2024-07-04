@@ -12,7 +12,6 @@ app.use(cors({
     methods : ["POST", "PUT", "DELETE", "PATCH","GET"],
     credentials: true, 
 }));
-app.use(cors())
 
 // MongoDB connection
 mongoose.connect(`${mongoUrl}`, { useNewUrlParser: true, useUnifiedTopology: true })
