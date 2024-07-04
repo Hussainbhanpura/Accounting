@@ -14,6 +14,14 @@ const Homepage = () => {
   const handleAddData = () => {
     setShowModal(true);
   };
+  const handleDelete = (id) => {
+    console.log(id);
+    try {
+      axios.delete(`${BASE_URL}/api/delete/${id}`).then((response) => {
+        window.location.reload();
+      });
+    } catch (error) {}
+  };
 
   useEffect(() => {
     axios
@@ -63,7 +71,11 @@ const Homepage = () => {
                   <button className='btn btn-sm btn-info mr-2' title='Edit'>
                     <i className='fas fa-edit'></i>
                   </button>
-                  <button className='btn btn-sm btn-danger' title='Delete'>
+                  <button
+                    className='btn btn-sm btn-danger'
+                    onClick={() => handleDelete(transaction._id)}
+                    title='Delete'
+                  >
                     <i className='fas fa-trash-alt'></i>
                   </button>
                 </td>

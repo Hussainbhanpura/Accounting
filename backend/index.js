@@ -68,6 +68,19 @@ app.get('/api/all',async(req,res)=>{
     }
 })
 
+app.delete('/api/delete/:id',async(req,res)=>{
+    try {
+        const result = await Purchase.findByIdAndDelete(req.params.id);
+        if (result) {
+            res.json({ message: "Purchase deleted successfully", deletedPurchase: result });
+        } else {
+            res.status(404).json({ message: "Purchase not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Failed to delete purchase", error: error.message });
+    }
+})
+
 app.listen(port, () => {
    console.log("Hello")
 });
