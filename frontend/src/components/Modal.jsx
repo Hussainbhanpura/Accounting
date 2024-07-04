@@ -8,8 +8,8 @@ const Modal = ({ modal }) => {
   const [gstRate, setgstRate] = useState(18);
   const [gst, setgst] = useState(0);
 
-  const handleSubmit = () => {
-    axios.post(`${BASE_URL}/data`, {
+  const handleSubmit = async () => {
+    await axios.post(`${BASE_URL}/data`, {
       inwardsAmount,
       purchaseAmount,
       gst,
