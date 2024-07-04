@@ -9,6 +9,7 @@ const Homepage = () => {
   const [showModal, setShowModal] = useState(false);
   const [gst, setgst] = useState(0);
   const [inwards, setinwards] = useState(0);
+  const [transactions, setTransactions] = useState([]);
 
   const handleAddData = () => {
     setShowModal(true);
@@ -25,6 +26,11 @@ const Homepage = () => {
       .catch((error) => {
         console.error("Error fetching total data:", error);
       });
+
+    axios.get(`${BASE_URL}/all`).then((response) => {
+      console.log(response.data);
+      setTransactions(response.data);
+    });
   }, []);
 
   return (
@@ -36,6 +42,36 @@ const Homepage = () => {
         + Add Data
       </button>
       {showModal && <Modal modal={setShowModal} />}
+
+      <div className='table-responsive'>
+        <table className='table table-striped table-hover'>
+          <thead className='thead-dark'>
+            <tr>
+              <th>Inwards</th>
+              <th>Purchase</th>
+              <th>GST</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {transactions.map((transaction, index) => (
+              <tr key={index}>
+                <td>{transaction.inwardsAmount}</td>
+                <td>{transaction.purchaseAmount}</td>
+                <td>{transaction.gst}</td>
+                <td>
+                  <button className='btn btn-sm btn-info mr-2' title='Edit'>
+                    <i className='fas fa-edit'></i>
+                  </button>
+                  <button className='btn btn-sm btn-danger' title='Delete'>
+                    <i className='fas fa-trash-alt'></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

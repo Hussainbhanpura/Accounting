@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 const mongoUrl = process.env.MONGO_URL;
 app.use(cors({
-    orgin : ["https://accounts-flax.vercel.app/"],
+    orgin : ["https://accounts-flax.vercel.app"],
     methods : ["POST", "PUT", "DELETE", "PATCH","GET"],
     credentials: true, 
 }));
@@ -57,6 +57,16 @@ app.get('/api/total', async (req, res) => {
         res.status(500).json({ message: "Failed to calculate totals", error: err.message });
     }
 });
+
+app.get('/api/all',async(req,res)=>{
+
+    try {
+        const data = await Purchase.find().sort({ createdAt: -1 }).limit(10);
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to fetch Ppurchase",error : error.message });
+    }
+})
 
 app.listen(port, () => {
    console.log("Hello")

@@ -13,7 +13,7 @@ const purchaseSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-});
+},{timestamps: true});
 
 const Purchase = mongoose.model('Purchase', purchaseSchema);
 
