@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import { Modal, Button } from "react-bootstrap"; // Assuming you're using react-bootstrap
 
 const Transactions = ({ transactions, handleDelete }) => {
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
+
+  const openConfirmModal = (id) => {
+    setDeleteId(id);
+    setShowConfirmModal(true);
+  };
+  const confirmDelete = () => {
+    handleDelete(deleteId);
+    setShowConfirmModal(false);
+  };
+
   return (
     <div>
       <div className='table-responsive'>
@@ -25,7 +38,7 @@ const Transactions = ({ transactions, handleDelete }) => {
                   </button>
                   <button
                     className='btn btn-sm btn-danger'
-                    onClick={() => handleDelete(transaction._id)}
+                    onClick={() => openConfirmModal(transaction._id)}
                     title='Delete'
                   >
                     <i className='fas fa-trash-alt'></i>
@@ -36,6 +49,26 @@ const Transactions = ({ transactions, handleDelete }) => {
           </tbody>
         </table>
       </div>
+
+      <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this transaction?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant='secondary'
+            onClick={() => setShowConfirmModal(false)}
+          >
+            Cancel
+          </Button>
+          <Button variant='danger' onClick={confirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

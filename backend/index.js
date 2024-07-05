@@ -60,8 +60,21 @@ app.get('/api/total', async (req, res) => {
 app.get('/api/all',async(req,res)=>{
 
     try {
-        const data = await Purchase.find().sort({ createdAt: -1 }).limit(10);
-        res.json(data);
+        const page = parseInt(req.query.page) || 1;
+        const limit = 5;
+        const skip = (page - 1) * limit;
+
+        const data = await Purchase.find()
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(limit);
+        const total = await Purchase.countDocuments();
+        res.json({
+            data,
+            currentPage: page,
+            totalPages: Math.ceil(total / limit),
+            totalItems: total
+        });
     } catch (error) {
         res.status(500).json({ message: "Failed to fetch Ppurchase",error : error.message });
     }
